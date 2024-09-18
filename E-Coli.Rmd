@@ -1,0 +1,34 @@
+---
+title: "E-Coli sequencing"
+author: "Xuan Cuong"
+output: html_document
+toc: true
+theme: cosmo
+---
+Download sequence of Escherichia coli str. K-12 substr. MG1655 str. K12 (GCA_000005845)
+```{r}
+library("R.utils")
+
+URL="http://ftp.ensemblgenomes.org/pub/bacteria/release-53/fasta/bacteria_0_collection/escherichia_coli_str_k_12_substr_mg1655_gca_000005845/cds/Escherichia_coli_str_k_12_substr_mg1655_gca_000005845.ASM584v2.cds.all.fa.gz"
+download.file(URL,destfile="ecoli_cds.fa.gz")
+gunzip("ecoli_cds.fa.gz")
+list.files()
+```
+Unzipping the downloaded file 
+```{r}
+library("seqinr")
+```
+Reading fastq files
+```{r}
+cds <- seqinr::read.fasta("ecoli_cds.fa")
+str(head(cds))
+```
+Number of coding sequences
+```{r}
+length(cds)
+```
+Summary of sequences
+```{r}
+head(summary(cds))
+```
+
